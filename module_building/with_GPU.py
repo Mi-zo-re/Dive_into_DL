@@ -1,0 +1,29 @@
+import torch
+from torch import nn
+
+# print(torch.cuda.is_available())
+# print(torch.cuda.device_count())
+# print(torch.cuda.current_device())
+# print(torch.cuda.get_device_name())
+
+x = torch.tensor([1, 2, 3])
+# print(x)
+x = x.cuda(0)
+# print(x)
+# print(x.device)
+
+# 直接在创建的时候指定设备
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+x = torch.tensor([1, 2, 3], device=device)
+# or
+x = torch.tensor([1, 2, 3]).to(device)
+# print(x)
+y = x ** 2
+# print(y)
+
+# z = y + x.cpu() 会报错
+
+net = nn.Linear(3, 1)
+# print(list(net.parameters())[0].device)
+net.cuda()
+# print(list(net.parameters())[0].device)
